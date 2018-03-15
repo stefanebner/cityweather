@@ -18,6 +18,7 @@ ext {
     runnerVersion = '1.0.1'
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.1'
+    ankoVersion = '0.10.4'
 
     // Architecture Components dependencies
     lifecycleVersion = '1.0.0'
