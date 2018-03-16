@@ -5,11 +5,11 @@ ext {
     minSdkVersion = 24
     targetSdkVersion = 27
     compSdkVersion = 27
-    buildToolsVersion = '27.1.0'
+    buildToolsVersion = '27.0.2'
     kotlinVersion = '1.2.30'
 
     // App dependencies
-    supportLibraryVersion = '27.1.0'
+    supportLibraryVersion = '27.0.2'
     kotlinVersion = '1.2.30'
     constraintVersion = '1.0.2'
     junitVersion = '4.12'
@@ -19,6 +19,7 @@ ext {
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.1'
     ankoVersion = '0.10.4'
+    glideVersion = '4.4.0'
 
     // Architecture Components dependencies
     lifecycleVersion = '1.0.0'

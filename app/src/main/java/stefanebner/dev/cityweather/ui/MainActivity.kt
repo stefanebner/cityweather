@@ -2,12 +2,11 @@ package stefanebner.dev.cityweather.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import stefanebner.dev.cityweather.BuildConfig
+import android.support.v4.app.Fragment
+import kotlinx.android.synthetic.main.app_bar_main.*
 import stefanebner.dev.cityweather.R
-import stefanebner.dev.cityweather.data.network.NetworkUtils
+import stefanebner.dev.cityweather.ui.cityList.CityListFragment
+import stefanebner.dev.cityweather.utils.InjectorUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,12 +14,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        doAsync {
-            var json = NetworkUtils().getJsonResponse(NetworkUtils().getCityUrl("London", "",
-                    BuildConfig.OpenWeatherApiKey))
-            uiThread {
-                singleWeatherText.text = json
-            }
+        setSupportActionBar(toolbar)
+
+        savedInstanceState ?: kotlin.run {
+            InjectorUtils().provideRepository(this).startLocalCitySync(assets.open("cityList.txt"))
+
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, CityListFragment() as Fragment, "cityList")
+                    .commit()
         }
     }
 }

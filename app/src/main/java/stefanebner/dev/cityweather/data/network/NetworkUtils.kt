@@ -9,9 +9,15 @@ class NetworkUtils {
     private val cityByName: String = "http://api.openweathermap.org/data/2.5/weather?q="
     private val cityById: String = "http://api.openweathermap.org/data/2.5/weather?id="
     private val appId: String = "&APPID="
+    private val asCelsius: String = "&units=metric"
 
-    fun getCityUrl(name: String, country: String = "", apiKey: String) =
-            cityByName + name + (if (country.isNotBlank()) ",$country" else "") + appId + apiKey
+    fun getCityByUrl(name: String, country: String = "", apiKey: String) =
+            cityByName + name + (if (country.isNotBlank()) ",$country" else "") +
+                    appId + apiKey + asCelsius
+
+    fun getCityById(id: Int, country: String = "", apiKey: String) =
+            cityById + id.toString() + (if (country.isNotBlank()) ",$country" else "") +
+                    appId + apiKey + asCelsius
 
     @Throws(IOException::class)
     fun getJsonResponse(url: String): String? {

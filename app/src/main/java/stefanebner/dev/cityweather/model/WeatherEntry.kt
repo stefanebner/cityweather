@@ -1,72 +1,29 @@
 package stefanebner.dev.cityweather.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-// Ignore all Entries for now, need typeconverter to fit into DB
-// TODO Write typeconverter for Main/Weather or deserialize differently from json
-@Entity(tableName = "weatherEntries")
-data class WeatherEntry(
-        @Ignore
-        var coordinates: Coordinates? = null,
-        @Ignore
-        var weather: Weather? = null,
-        @Ignore
-        var base: String = "",
-        @Ignore
-        var main: Main? = null,
-        @Ignore
-        var visibility: Double = 0.0,
-        @Ignore
-        var wind: Wind? = null,
-        @Ignore
-        var clouds: Clouds? = null,
-        @Ignore
-        var dt: Long = 0,
-        @Ignore
-        var sys: Sys? = null,
-        @PrimaryKey
-        var id: Int = 0,
-        var name: String = "",
-        @Ignore
-        var cod: Int = 0
-)
-
-data class Coordinates(
-        val lon: Double,
-        val lat: Double
-)
-
-data class Weather(
-        val id: Int,
-        val main: String,
-        val description: String,
-        val icon: String
-)
-
-data class Main(
-        val temp: Double,
-        val prepssure: Int,
-        val humidity: Int,
-        val tempMin: Double,
-        val tempMax: Double
-)
-
-data class Wind(
-        val speed: Double,
-        val deg: Int
-)
-
-data class Clouds(
-        val all: Int
-)
-
-data class Sys(
-        val type: Int,
-        val id: Int,
-        val message: Double,
-        val country: String,
-        val sunrise: Long,
-        val sunset: Long
-)
+// Adding id and name for now to the DB
+data class WeatherEntry(@SerializedName("dt")
+                        val dt: Long = 0,
+                        @SerializedName("coord")
+                        val coord: Coord,
+                        @SerializedName("visibility")
+                        val visibility: Int = 0,
+                        @SerializedName("weather")
+                        val weather: List<WeatherItem>?,
+                        @SerializedName("name")
+                        val name: String = "",
+                        @SerializedName("cod")
+                        val cod: Int = 0,
+                        @SerializedName("main")
+                        val main: Main,
+                        @SerializedName("clouds")
+                        val clouds: Clouds,
+                        @SerializedName("id")
+                        val id: Int = 0,
+                        @SerializedName("sys")
+                        val sys: Sys,
+                        @SerializedName("base")
+                        val base: String = "",
+                        @SerializedName("wind")
+                        val wind: Wind)
