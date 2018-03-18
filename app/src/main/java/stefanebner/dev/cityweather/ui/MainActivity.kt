@@ -1,8 +1,8 @@
 package stefanebner.dev.cityweather.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
 import stefanebner.dev.cityweather.R
 import stefanebner.dev.cityweather.ui.cityList.CityListFragment

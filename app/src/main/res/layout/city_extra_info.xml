@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.constraint.Guideline
-        android:id="@+id/horizontal_middle"
+        android:id="@+id/extra_horizontal_middle_guidline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -15,60 +15,108 @@
         tools:layout_editor_absoluteY="0dp"/>
 
     <TextView
-        android:id="@+id/humidity"
-        android:layout_width="wrap_content"
+        android:id="@+id/extra_humidity"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/horizontal_middle"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintEnd_toStartOf="@+id/extra_horizontal_middle_guidline"
+        app:layout_constraintStart_toEndOf="@+id/extra_text_humidity"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="humidity" />
 
     <TextView
-        android:id="@+id/pressure"
-        android:layout_width="wrap_content"
+        android:id="@+id/extra_pressure"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
+        app:layout_constraintStart_toEndOf="@+id/extra_text_pressure"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="pressure" />
 
     <TextView
-        android:id="@+id/wind"
-        android:layout_width="wrap_content"
+        android:id="@+id/extra_wind"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
-        app:layout_constraintTop_toBottomOf="@+id/pressure"
+        app:layout_constraintStart_toEndOf="@+id/extra_text_wind"
+        app:layout_constraintTop_toBottomOf="@+id/extra_pressure"
         tools:text="wind" />
 
     <TextView
-        android:id="@+id/tbd"
-        android:layout_width="wrap_content"
+        android:id="@+id/extra_cloudiness"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/horizontal_middle"
+        app:layout_constraintEnd_toStartOf="@+id/extra_horizontal_middle_guidline"
+        app:layout_constraintStart_toEndOf="@+id/extra_text_cloudiness"
+        app:layout_constraintTop_toBottomOf="@+id/extra_humidity"
+        tools:text="chance of meatballs" />
+
+    <TextView
+        android:id="@+id/extra_text_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/text_size_small"
+        android:textAlignment="viewStart"
+        android:text="@string/humidity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/humidity"
-        tools:text="any" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/extra_text_cloudiness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/text_size_small"
+        android:text="@string/cloudiness"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extra_text_humidity" />
+
+    <TextView
+        android:id="@+id/extra_text_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/text_size_small"
+        android:text="@string/pressure"
+        app:layout_constraintStart_toStartOf="@+id/extra_horizontal_middle_guidline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/extra_text_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/text_size_small"
+        android:text="@string/wind"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extra_horizontal_middle_guidline"
+        app:layout_constraintTop_toBottomOf="@+id/extra_text_pressure" />
 
 </android.support.constraint.ConstraintLayout>

@@ -11,7 +11,7 @@ class InjectorUtils {
 
     fun provideRepository(context: Context) : CityRepository {
         val dataBase = CityDatabase.getInstance(context)
-        val dataSource = OpenWeatherDataSource.getInstance(context)
+        val dataSource = OpenWeatherDataSource.getInstance(context, dataBase.cityDao())
         return CityRepository.getInstance(dataBase.cityDao(), dataSource)
     }
 

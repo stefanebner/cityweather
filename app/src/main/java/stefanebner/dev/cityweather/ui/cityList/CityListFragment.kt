@@ -3,18 +3,20 @@ package stefanebner.dev.cityweather.ui.cityList
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_city_list.*
 import stefanebner.dev.cityweather.R
 import stefanebner.dev.cityweather.model.City
-import stefanebner.dev.cityweather.utils.InjectorUtils
-import android.content.Intent
 import stefanebner.dev.cityweather.ui.cityDetail.CityDetailActivity
+import stefanebner.dev.cityweather.utils.InjectorUtils
 
 
 class CityListFragment: Fragment() {
@@ -44,6 +46,10 @@ class CityListFragment: Fragment() {
         recyclerview_search.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerview_search.setHasFixedSize(true)
 
+        val itemDecor = DividerItemDecoration(context, LinearLayout.VERTICAL)
+        recyclerview_cities.addItemDecoration(itemDecor)
+        recyclerview_search.addItemDecoration(itemDecor)
+
         cityListAdapter = CityListAdapter(context, emptyList()) { onCityClicked(it) }
         recyclerview_cities.adapter = cityListAdapter
 
@@ -59,7 +65,6 @@ class CityListFragment: Fragment() {
             recyclerview_cities.smoothScrollToPosition(position)
         })
 
-        // TODO put this into a seperate activity & searchable
         searchListAdapter = CityListAdapter(context, emptyList()) { onCityClicked(it) }
         recyclerview_search.adapter = searchListAdapter
 
@@ -120,7 +125,6 @@ class CityListFragment: Fragment() {
         val weatherDetailIntent = Intent(context, CityDetailActivity::class.java)
         weatherDetailIntent.putExtra(CityDetailActivity().cityId, id)
         startActivity(weatherDetailIntent)
-        //TODO Open detailed view of information from city -> extend city data class with more info
     }
 
     private fun putListIntoForeground(city: Boolean) {

@@ -2,7 +2,6 @@ package stefanebner.dev.cityweather.data.network
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import stefanebner.dev.cityweather.BuildConfig
 import java.io.IOException
 
 class NetworkUtils {

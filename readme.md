@@ -14,6 +14,8 @@ OpenWeather call for a City
 - Cache and display results if no active internet connection
 
 # TODO
-- Everything
+- tests
+- fix bug in search of entries appearing late
+- UI
 
 # Personal note

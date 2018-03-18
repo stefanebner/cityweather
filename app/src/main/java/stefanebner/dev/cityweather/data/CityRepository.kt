@@ -40,16 +40,10 @@ class CityRepository private constructor(
         doAsync {
             // roughly 74k entries in the text file, restart import if not all are parsed
             if (getNumberOfCitiesInDatabase() < 74000) {
-                inputStream.bufferedReader().forEachLine {
-                    val line = it.split("\t")
-                    dao.insertCity(City(line[0].toInt(), line[1], line[4], line[2].toDouble(),
-                            line[3].toDouble(), 0.0, 0, false, 0.0, 0.0, "", 0, 0, 0.0))
-                }
+                inputStream.bufferedReader().forEachLine { dao.insertCity(City(it.split("\t"))) }
             }
         }
     }
-
-    fun getLatestTen(timestamp: Long) = dao.getLatestTenSearched(timestamp)
 
     fun getAll() = dao.getAll()
 
@@ -60,30 +54,11 @@ class CityRepository private constructor(
     private fun updateCity(city: City) = dao.insertCity(city)
 
     fun updateWeatherForCity(name: String) {
-        requestData(NetworkUtils().getCityByUrl(name, "", BuildConfig.OpenWeatherApiKey))
+        dataSourceOpen.requestData(NetworkUtils().getCityByUrl(name, "", BuildConfig.OpenWeatherApiKey))
     }
 
     fun updateWeatherForId(id: Int) {
-        requestData(NetworkUtils().getCityById(id, "", BuildConfig.OpenWeatherApiKey))
-    }
-
-    private fun requestData(url: String) {
-        doAsync {
-            val json = NetworkUtils().getJsonResponse(url)
-            val entry: WeatherEntry? = json?.let {
-                JsonParser().parseWeatherFromJson(it)
-            }
-            entry?.apply {
-                val city: City = with(entry) {
-                    var mainDescription = ""
-                    weather?.let { mainDescription = it[0].description }
-                    City(id, name, sys.country, coord.lon, coord.lat, main.temp, dt, true,
-                            main.tempMin, main.tempMax, mainDescription, main.pressure,
-                            main.humidity, wind.speed)
-                }
-                updateCity(city)
-            }
-        }
+        dataSourceOpen.requestData(NetworkUtils().getCityById(id, "", BuildConfig.OpenWeatherApiKey))
     }
 
     fun searchForCity(searchTerm: String) = dao.findCityByName(searchTerm)

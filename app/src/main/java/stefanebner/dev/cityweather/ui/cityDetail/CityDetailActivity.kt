@@ -9,7 +9,9 @@ import kotlinx.android.synthetic.main.city_main_info.*
 import stefanebner.dev.cityweather.R
 import stefanebner.dev.cityweather.model.City
 import stefanebner.dev.cityweather.utils.InjectorUtils
+import stefanebner.dev.cityweather.utils.loadImage
 import stefanebner.dev.cityweather.utils.roundToTwoDecimals
+import java.text.SimpleDateFormat
 import java.util.*
 
 class CityDetailActivity : AppCompatActivity() {
@@ -34,12 +36,18 @@ class CityDetailActivity : AppCompatActivity() {
 
     private fun displayCity(city: City?) {
         city?.let {
-            date.text = Date(it.date).toString()
-            description.text = it.description
-            currentTemperature.text = it.temp.roundToTwoDecimals().toString()
-            hightestTemperature.text = it.tempMax.roundToTwoDecimals().toString()
-            lowestTemperature.text = it.tempMin.roundToTwoDecimals().toString()
-//            pressure.text = it.pressure.toString()
+            val sdf = SimpleDateFormat("EEE, d MMM - HH:mm:ss", resources.configuration.locales[0])
+            main_date.text = sdf.format(Date(it.date * 1000L))
+            main_city_name.text = city.name
+            main_description.text = it.description
+            main_current_temperature.text = getString(R.string.temperature, it.temp.roundToTwoDecimals().toString())
+            main_highest_temperature.text = getString(R.string.temperature, it.tempMax.roundToTwoDecimals().toString())
+            main_lowest_temperature.text = getString(R.string.temperature, it.tempMin.roundToTwoDecimals().toString())
+            extra_pressure.text = it.pressure.toString()
+            extra_humidity.text = it.humidity.toString()
+            extra_wind.text = getString(R.string.wind_speed, it.wind.toString())
+            extra_cloudiness.text = it.cloudiness.toString()
+            main_weather_icon.loadImage("http://openweathermap.org/img/w/" + it.icon + ".png")
         }
     }
 }
