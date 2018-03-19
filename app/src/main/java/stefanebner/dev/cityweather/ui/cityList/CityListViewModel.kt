@@ -18,6 +18,7 @@ class CityListViewModel(
     private val repositoryCities: LiveData<List<City>> = repository.getAll()
     private val cities = MutableLiveData<List<City>>()
     private val searchedCities = MutableLiveData<List<City>>()
+    private var currentSearchTermLength = 0
 
     init {
         observer = Observer { cities.postValue(it?.sortedWith(dateComparator))}
@@ -38,8 +39,12 @@ class CityListViewModel(
     }
 
     fun searchForCity(searchTerm: String) {
+        currentSearchTermLength = searchTerm.length
         doAsync {
-            searchedCities.postValue(repository.searchForCity(searchTerm).sortedWith(dateComparator))
+            val foundCities = repository.searchForCity(searchTerm).sortedWith(dateComparator)
+            if(currentSearchTermLength == searchTerm.length) {
+                searchedCities.postValue(foundCities)
+            }
         }
     }
 

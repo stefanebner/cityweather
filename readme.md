@@ -15,7 +15,6 @@ OpenWeather call for a City
 
 # TODO
 - tests
-- fix timing issue of fast firing queries
 - UI
 
 # Personal note
