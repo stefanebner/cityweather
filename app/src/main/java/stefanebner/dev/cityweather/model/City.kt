@@ -20,7 +20,8 @@ data class City(
         val wind: Double = 0.0,
         val cloudiness: Int = 0,
         var description: String = "",
-        var icon: String = ""
+        var icon: String = "",
+        var weatherCode: Int = 0
 ) {
     // Used when creating a city from the parsed json we get back from OpenWeather
     constructor(entry: WeatherEntry) : this(
@@ -42,6 +43,7 @@ data class City(
             if (it.isNotEmpty()) {
                 description = it[0].description
                 icon = it[0].icon
+                weatherCode = it[0].id
             }
         }
     }

@@ -23,8 +23,8 @@ class CityDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val id = intent.getIntExtra(cityId, -1)
 
+        val id = intent.getIntExtra(cityId, -1)
         val factory = InjectorUtils().provideDetailViewModelFactory(this, id)
         viewModel = ViewModelProviders.of(this, factory)
                 .get(CityDetailViewModel::class.java)
@@ -48,6 +48,19 @@ class CityDetailActivity : AppCompatActivity() {
             extra_wind.text = it.wind.toString() + "m/s"
             extra_cloudiness.text = it.cloudiness.toString()
             main_weather_icon.loadImage("http://openweathermap.org/img/w/" + it.icon + ".png")
+            setBackground(it.weatherCode)
+        }
+    }
+
+    private fun setBackground(id: Int) {
+        when (id) {
+            in 200..299 -> main_background.setImageResource(R.color.colorThunder)
+            in 300..399 -> main_background.setImageResource(R.color.colorDrizzle)
+            in 500..599 -> main_background.setImageResource(R.color.colorRain)
+            in 600..699 -> main_background.setImageResource(R.color.colorSnow)
+            in 700..799 -> main_background.setImageResource(R.color.colorAtmosphere)
+            800 -> main_background.setImageResource(R.color.colorSun)
+            else -> main_background.setImageResource(R.color.colorBasic)
         }
     }
 }

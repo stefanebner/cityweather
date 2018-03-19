@@ -22,7 +22,9 @@ abstract class CityDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context?) =
                 if (context != null) {
                     Room.databaseBuilder(context.applicationContext,
-                            CityDatabase::class.java, "WeatherDatabase.db").build()
+                            CityDatabase::class.java, "WeatherDatabase.db")
+                            .fallbackToDestructiveMigration() //TODO provide migration
+                            .build()
                 } else {
                     throw Throwable()
                 }

@@ -3,4 +3,12 @@
     <color name="colorPrimary">#4763ff</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorSnow">#d4d4d4</color>
+    <color name="colorRain">#c6c9ff</color>
+    <color name="colorSun">#f4edc5</color>
+    <color name="colorThunder">#8449ec</color>
+    <color name="colorDrizzle">#d2f7ff</color>
+    <color name="colorAtmosphere">#7b7b7b</color>
+    <color name="colorBasic">#e1e1e1</color>
+
 </resources>

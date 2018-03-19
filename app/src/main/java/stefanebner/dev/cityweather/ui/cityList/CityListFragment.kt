@@ -18,7 +18,6 @@ import stefanebner.dev.cityweather.model.City
 import stefanebner.dev.cityweather.ui.cityDetail.CityDetailActivity
 import stefanebner.dev.cityweather.utils.InjectorUtils
 
-
 class CityListFragment: Fragment() {
 
     private lateinit var cityListAdapter: CityListAdapter

@@ -15,6 +15,7 @@ OpenWeather call for a City
 
 # TODO
 - tests
+- provide database migration
 - UI
 
 # Personal note
