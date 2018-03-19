@@ -40,12 +40,12 @@ class CityDetailActivity : AppCompatActivity() {
             main_date.text = sdf.format(Date(it.date * 1000L))
             main_city_name.text = city.name
             main_description.text = it.description
-            main_current_temperature.text = getString(R.string.temperature, it.temp.roundToTwoDecimals().toString())
-            main_highest_temperature.text = getString(R.string.temperature, it.tempMax.roundToTwoDecimals().toString())
-            main_lowest_temperature.text = getString(R.string.temperature, it.tempMin.roundToTwoDecimals().toString())
+            main_current_temperature.text = it.temp.roundToTwoDecimals().toString() + 0x00B0.toChar()
+            main_highest_temperature.text = it.tempMax.roundToTwoDecimals().toString() + 0x00B0.toChar()
+            main_lowest_temperature.text = it.tempMin.roundToTwoDecimals().toString() + 0x00B0.toChar()
             extra_pressure.text = it.pressure.toString()
             extra_humidity.text = it.humidity.toString()
-            extra_wind.text = getString(R.string.wind_speed, it.wind.toString())
+            extra_wind.text = it.wind.toString() + "m/s"
             extra_cloudiness.text = it.cloudiness.toString()
             main_weather_icon.loadImage("http://openweathermap.org/img/w/" + it.icon + ".png")
         }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.city_list_item.view.*
 import stefanebner.dev.cityweather.R
 import stefanebner.dev.cityweather.model.City
+import stefanebner.dev.cityweather.utils.roundToTwoDecimals
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +29,7 @@ class CityListAdapter(
     inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(city: City, listener: (Int) -> Unit) = with(itemView) {
             item_city.text = city.name
-            item_temp.text = resources.getText(R.string.temperature, city.temp.toString())
+            item_temp.text = city.temp.roundToTwoDecimals().toString() + 0x00B0.toChar()
             item_country.text = city.country
 
             if (city.date > 1) {

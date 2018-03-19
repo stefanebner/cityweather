@@ -39,7 +39,7 @@ class CityListViewModel(
 
     fun searchForCity(searchTerm: String) {
         doAsync {
-            searchedCities.postValue(repository.searchForCity(searchTerm))
+            searchedCities.postValue(repository.searchForCity(searchTerm).sortedWith(dateComparator))
         }
     }
 
@@ -52,14 +52,6 @@ class CityListViewModel(
             c1.name.compareTo(c2.name)
         } else {
             c1.date.compareTo(c2.date)
-        }
-    }
-
-    private val nameComparator: Comparator<City> = Comparator { c1, c2 ->
-        if (c1.name == c2.name) {
-            c1.date.compareTo(c2.date)
-        } else {
-            c1.name.compareTo(c2.name)
         }
     }
 }
