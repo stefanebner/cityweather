@@ -7,9 +7,6 @@ import stefanebner.dev.cityweather.data.database.CityDao
 import stefanebner.dev.cityweather.data.network.NetworkUtils
 import stefanebner.dev.cityweather.data.network.OpenWeatherDataSource
 import stefanebner.dev.cityweather.model.City
-import stefanebner.dev.cityweather.model.Sys
-import stefanebner.dev.cityweather.model.WeatherEntry
-import stefanebner.dev.cityweather.utils.JsonParser
 import java.io.InputStream
 
 class CityRepository private constructor(
@@ -51,8 +48,6 @@ class CityRepository private constructor(
 
     private fun getNumberOfCitiesInDatabase() = dao.getNumberOfEntries()
 
-    private fun updateCity(city: City) = dao.insertCity(city)
-
     fun updateWeatherForCity(name: String) {
         dataSourceOpen.requestData(NetworkUtils().getCityByUrl(name, "", BuildConfig.OpenWeatherApiKey))
     }
@@ -61,5 +56,5 @@ class CityRepository private constructor(
         dataSourceOpen.requestData(NetworkUtils().getCityById(id, "", BuildConfig.OpenWeatherApiKey))
     }
 
-    fun searchForCity(searchTerm: String) = dao.findCityByName(searchTerm)
+    fun searchForCity(searchTerm: String) = dao.findCitiesByName(searchTerm)
 }

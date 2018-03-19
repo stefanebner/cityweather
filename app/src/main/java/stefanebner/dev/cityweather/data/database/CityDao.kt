@@ -12,11 +12,8 @@ interface CityDao {
     @Query("SELECT * FROM cities WHERE date > 0")
     fun getAll(): LiveData<List<City>>
 
-    @Query("SELECT * FROM cities WHERE date >= :timestamp ORDER BY date DESC LIMIT 10")
-    fun getLatestTenSearched(timestamp: Long): List<City>
-
-    @Query("SELECT * FROM cities WHERE name LIKE '%' || :cityName || '%'")
-    fun findCityByName(cityName: String): List<City>
+    @Query("SELECT * FROM cities WHERE name LIKE :cityName || '%'")
+    fun findCitiesByName(cityName: String): List<City>
 
     @Query("SELECT * FROM cities WHERE id IS :id")
     fun getWeatherForId(id: Int): LiveData<City>

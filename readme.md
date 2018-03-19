@@ -15,7 +15,7 @@ OpenWeather call for a City
 
 # TODO
 - tests
-- fix bug in search of entries appearing late
+- fix timing issue of fast firing queries
 - UI
 
 # Personal note

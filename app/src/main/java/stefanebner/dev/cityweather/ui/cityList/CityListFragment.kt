@@ -97,7 +97,11 @@ class CityListFragment: Fragment() {
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String): Boolean {
-                viewModelCity.searchForCity(query)
+                if (query.isEmpty()) {
+                    searchListAdapter.updateCities(emptyList())
+                } else {
+                    viewModelCity.searchForCity(query)
+                }
                 return true
             }
 
