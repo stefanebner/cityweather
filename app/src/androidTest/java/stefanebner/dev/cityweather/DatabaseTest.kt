@@ -1,12 +1,12 @@
 package stefanebner.dev.cityweather
 
-import org.junit.After
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
-import org.junit.Before
 import android.support.test.runner.AndroidJUnit4
 import org.hamcrest.core.IsEqual.equalTo
+import org.junit.After
 import org.junit.Assert.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import stefanebner.dev.cityweather.data.database.CityDao
@@ -15,15 +15,15 @@ import java.io.IOException
 
 
 @RunWith(AndroidJUnit4::class)
-class SimpleEntityReadWriteTest {
-    private var mUserDao: CityDao? = null
+class DatabaseTest {
+    private var mDao: CityDao? = null
     private var mDb: CityDatabase? = null
 
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
         mDb = Room.inMemoryDatabaseBuilder(context, CityDatabase::class.java!!).build()
-        mUserDao = mDb!!.cityDao()
+        mDao = mDb!!.cityDao()
     }
 
     @After
@@ -34,10 +34,19 @@ class SimpleEntityReadWriteTest {
 
     @Test
     @Throws(Exception::class)
-    fun writeUserAndReadInList() {
-        val city = TestUtil().createCity(1)
-        mUserDao!!.insertCity(city)
-        val byName = mUserDao!!.getWeatherForCity("name1")
-        assertThat(byName.value, equalTo(city))
+    fun writeCityAndGetByName() {
+        val city =createCity(1)
+        mDao!!.insertCity(city)
+        val byName = mDao!!.getWeatherForCity("name1").blockingObserve()
+        assertThat(byName, equalTo(city))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun writeCityAndGetById() {
+        val city = createCity(1)
+        mDao!!.insertCity(city)
+        val byName = mDao!!.getWeatherForId(1).blockingObserve()
+        assertThat(byName, equalTo(city))
     }
 }
