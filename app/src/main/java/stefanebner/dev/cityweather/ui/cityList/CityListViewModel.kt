@@ -13,7 +13,6 @@ class CityListViewModel(
         private val repository: CityRepository
 ) : ViewModel() {
 
-    // private val fourteenDaysInMs: Long = 14 * 1000 * 60 * 60 * 24
     private val observer: Observer<List<City>>
     private val repositoryCities: LiveData<List<City>> = repository.getAll()
     private val cities = MutableLiveData<List<City>>()
