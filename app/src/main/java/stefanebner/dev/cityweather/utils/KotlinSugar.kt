@@ -1,5 +1,7 @@
 package stefanebner.dev.cityweather.utils
 
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import kotlin.math.pow
@@ -15,4 +17,9 @@ fun ImageView.loadImage(url: String) {
 fun Double.roundToTwoDecimals(): Double {
     val power = (10.0).pow(2)
     return round(this * power) / power
+}
+
+fun RecyclerView.showView(visible: Boolean) {
+    if (visible) visibility = View.VISIBLE
+    else visibility = View.INVISIBLE
 }

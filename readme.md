@@ -14,8 +14,8 @@ OpenWeather call for a City
 - Cache and display results if no active internet connection
 
 # TODO
-- tests
-- provide database migration
-- UI
-
-# Personal note
+- Tests
+- Provide database migration
+- UI improvements
+- Improve search behavior
+- UI for data that cannot be fetched/is not present on OpenWeather using the public API
