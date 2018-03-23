@@ -63,4 +63,9 @@ class CityDetailActivity : AppCompatActivity() {
             else -> main_background.setImageResource(R.color.colorBasic)
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

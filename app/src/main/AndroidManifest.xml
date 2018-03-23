@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.cityList.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
@@ -21,10 +21,10 @@
         </activity>
 
         <activity android:name=".ui.cityDetail.CityDetailActivity"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.cityList.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity"/>
+                android:value=".ui.cityList.MainActivity"/>
         </activity>
     </application>
 
