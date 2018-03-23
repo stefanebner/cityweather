@@ -21,6 +21,7 @@ ext {
     ankoVersion = '0.10.4'
     glideVersion = '4.4.0'
     mockitoVersion = '1.5.0'
+    koinVersion = '0.9.1'
 
     // Architecture Components dependencies
     lifecycleVersion = '1.0.0'

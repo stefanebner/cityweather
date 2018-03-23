@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,20 +18,23 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_city_list.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.appcompat.v7.coroutines.onSearchClick
+import org.koin.android.architecture.ext.viewModel
+import org.koin.android.ext.android.inject
 import stefanebner.dev.cityweather.R
+import stefanebner.dev.cityweather.data.CityRepository
 import stefanebner.dev.cityweather.model.City
 import stefanebner.dev.cityweather.ui.cityDetail.CityDetailActivity
-import stefanebner.dev.cityweather.utils.InjectorUtils
 import stefanebner.dev.cityweather.utils.showView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var cityListAdapter: CityListAdapter
     private lateinit var searchListAdapter: CityListAdapter
-    private lateinit var viewModelCity: CityListViewModel
+    private val viewModelCity by viewModel<CityListViewModel>()
     private lateinit var searchView: SearchView
     private lateinit var menuItem: MenuItem
     private var isSearchOpen = false
+    private val repository: CityRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +43,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(activity_toolbar)
 
         savedInstanceState ?: kotlin.run {
-            InjectorUtils().provideRepository(this).startLocalCitySync(assets.open("cityList.txt"))
+            repository.startLocalCitySync(assets.open("cityList.txt"))
         }
-
-        val factory = InjectorUtils().provideListViewModelFactory(this)
-        viewModelCity = ViewModelProviders.of(this, factory).get(CityListViewModel::class.java)
 
         val itemDecor = DividerItemDecoration(this, LinearLayout.VERTICAL)
         cityListAdapter = CityListAdapter(this, emptyList()) { onCityClicked(it) }

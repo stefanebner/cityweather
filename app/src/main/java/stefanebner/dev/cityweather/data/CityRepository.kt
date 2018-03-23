@@ -4,35 +4,28 @@ import android.arch.lifecycle.Observer
 import org.jetbrains.anko.doAsync
 import stefanebner.dev.cityweather.BuildConfig
 import stefanebner.dev.cityweather.data.database.CityDao
+import stefanebner.dev.cityweather.data.database.CityDatabase
 import stefanebner.dev.cityweather.data.network.NetworkUtils
 import stefanebner.dev.cityweather.data.network.OpenWeatherDataSource
 import stefanebner.dev.cityweather.model.City
 import java.io.InputStream
 
-class CityRepository private constructor(
-       private val dao: CityDao,
+class CityRepository(
+       database: CityDatabase,
        private val dataSourceOpen: OpenWeatherDataSource
 ) {
 
+    private val dao: CityDao
+
     init {
         val networkData = dataSourceOpen.getAllCities()
+        dao = database.cityDatabase.cityDao()
         val observer = Observer<List<City>> { cities -> doAsync { dao.insertAll(cities) } }
         networkData.observeForever(observer)
     }
 
-    companion object {
-        @Volatile private var INSTANCE: CityRepository? = null
-
-        fun getInstance(dao: CityDao, dataSourceOpen: OpenWeatherDataSource) : CityRepository =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: createWeatherRepository(dao, dataSourceOpen).also { INSTANCE = it}
-                }
-
-        private fun createWeatherRepository(dao: CityDao, dataSourceOpen: OpenWeatherDataSource) =
-                CityRepository(dao, dataSourceOpen)
-    }
-
-    // id	nm	lat	lon	countryCode
+    // id nm lat lon countryCode ->
+    // city ID, Name, latitude, longitude, 2letter country code
     fun startLocalCitySync(inputStream: InputStream) {
         doAsync {
             // roughly 74k entries in the text file, restart import if not all are parsed

@@ -52,19 +52,12 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     kapt "android.arch.persistence.room:compiler:$roomVersion"
 
-    // glide
+    // libraries
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
-
-    // okhttp
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
-
-    // gson
     implementation "com.google.code.gson:gson:$gsonVersion"
-
-    // RecyclerView
     implementation "com.android.support:recyclerview-v7:$buildToolsVersion"
-
-    // anko
     implementation "org.jetbrains.anko:anko:$ankoVersion"
+    compile "org.koin:koin-android-architecture:$koinVersion"
 }
