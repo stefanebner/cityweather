@@ -4,11 +4,8 @@ import android.arch.lifecycle.ViewModel
 import stefanebner.dev.cityweather.data.CityRepository
 
 class CityDetailViewModel(
-        repository: CityRepository,
-        id: Int
+        private val repository: CityRepository
 ) : ViewModel() {
 
-    private val city = repository.getCityById(id)
-
-    fun getCityInformation() = city
+    fun getCityInformation(id: Int) = repository.getCityById(id)
 }

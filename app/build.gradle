@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$runnerVersion"
     androidTestImplementation "com.android.support.test:rules:$rulesVersion"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoVersion"
+    testImplementation "org.koin:koin-test:$koinVersion"
 
 
     // android architecture components
@@ -59,5 +60,5 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "com.android.support:recyclerview-v7:$buildToolsVersion"
     implementation "org.jetbrains.anko:anko:$ankoVersion"
-    compile "org.koin:koin-android-architecture:$koinVersion"
+    implementation "org.koin:koin-android-architecture:$koinVersion"
 }

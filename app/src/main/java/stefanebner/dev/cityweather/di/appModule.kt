@@ -9,24 +9,10 @@ import stefanebner.dev.cityweather.data.network.OpenWeatherDataSource
 import stefanebner.dev.cityweather.ui.cityDetail.CityDetailViewModel
 import stefanebner.dev.cityweather.ui.cityList.CityListViewModel
 
-val cityModule = applicationContext {
+val appModule = applicationContext {
     viewModel { CityListViewModel(get()) }
-}
-
-val detailModule = applicationContext {
-    viewModel { params -> CityDetailViewModel(get(), params["id"]) }
-}
-
-val repositoryModule = applicationContext {
+    viewModel { CityDetailViewModel(get()) }
     bean { CityRepository(get(), get()) }
-}
-
-val dataSourceModule = applicationContext {
     bean { OpenWeatherDataSource(get(), get()) }
-}
-
-val databaseModule = applicationContext {
     bean { CityDatabase(get()) }
 }
-
-val allModlules = listOf(cityModule, detailModule, repositoryModule, dataSourceModule, databaseModule)

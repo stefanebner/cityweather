@@ -2,12 +2,12 @@ package stefanebner.dev.cityweather
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin
-import stefanebner.dev.cityweather.di.allModlules
+import stefanebner.dev.cityweather.di.appModule
 
-class CityWeatherApplication: Application() {
+open class CityWeatherApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, allModlules)
+        startKoin(this, listOf(appModule))
     }
 }

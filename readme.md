@@ -17,5 +17,5 @@ OpenWeather call for a City
 - Tests
 - Provide database migration
 - UI improvements
-- Improve search behavior
+- Improve search behavior and keep search & results during orientationchange
 - UI for data that cannot be fetched/is not present on OpenWeather using the public API

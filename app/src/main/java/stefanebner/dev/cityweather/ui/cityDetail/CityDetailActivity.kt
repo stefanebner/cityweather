@@ -15,13 +15,13 @@ import java.util.*
 
 class CityDetailActivity : AppCompatActivity() {
 
-    private val viewModel by viewModel<CityDetailViewModel> { mapOf("id" to intent.getIntExtra(cityId, -1)) }
+    private val viewModel by viewModel<CityDetailViewModel>()
     val cityId = "CITY_ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        viewModel.getCityInformation().observe(this, Observer {
+        viewModel.getCityInformation(intent.getIntExtra(cityId, -1)).observe(this, Observer {
             displayCity(it)
         })
     }
