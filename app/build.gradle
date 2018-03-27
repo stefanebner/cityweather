@@ -53,6 +53,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
 
     // android architecture components
     implementation "android.arch.persistence.room:runtime:$roomVersion"
