@@ -28,7 +28,6 @@ android {
             buildConfigField("String", "OpenWeatherApiKey", OpenWeatherApiKey)
         }
     }
-
 }
 
 dependencies {
@@ -47,6 +46,13 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoVersion"
     testImplementation "org.koin:koin-test:$koinVersion"
 
+    // rx & retrofit
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 
     // android architecture components
     implementation "android.arch.persistence.room:runtime:$roomVersion"

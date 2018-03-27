@@ -2,10 +2,8 @@ package stefanebner.dev.cityweather.data
 
 import android.arch.lifecycle.Observer
 import org.jetbrains.anko.doAsync
-import stefanebner.dev.cityweather.BuildConfig
 import stefanebner.dev.cityweather.data.database.CityDao
 import stefanebner.dev.cityweather.data.database.CityDatabase
-import stefanebner.dev.cityweather.data.network.NetworkUtils
 import stefanebner.dev.cityweather.data.network.OpenWeatherDataSource
 import stefanebner.dev.cityweather.model.City
 import java.io.InputStream
@@ -41,13 +39,9 @@ class CityRepository(
 
     private fun getNumberOfCitiesInDatabase() = dao.getNumberOfEntries()
 
-    fun updateWeatherForCity(name: String) {
-        dataSourceOpen.requestData(NetworkUtils().getCityByUrl(name, "", BuildConfig.OpenWeatherApiKey))
-    }
+    fun updateWeatherForCity(name: String) = dataSourceOpen.updateCityData(name)
 
-    fun updateWeatherForId(id: Int) {
-        dataSourceOpen.requestData(NetworkUtils().getCityById(id, "", BuildConfig.OpenWeatherApiKey))
-    }
+    fun updateWeatherForId(id: Int) = dataSourceOpen.updateCityData(id)
 
     fun searchForCity(searchTerm: String) = dao.findCitiesByName(searchTerm)
 }

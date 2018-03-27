@@ -22,6 +22,10 @@ ext {
     glideVersion = '4.4.0'
     mockitoVersion = '1.5.0'
     koinVersion = '0.9.1'
+    rxJavaVersion = '2.1.12'
+    rxKotlinVersion = '2.2.0'
+    retrofitVersion = '2.4.0'
+    rxAndroidVersion = '2.0.2'
 
     // Architecture Components dependencies
     lifecycleVersion = '1.1.1'
@@ -29,12 +33,13 @@ ext {
 }
 
 buildscript {
+    ext.gradleVersion = '3.1.0'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha07'
+        classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.31"
 
         // NOTE: Do not place your application dependencies here; they belong

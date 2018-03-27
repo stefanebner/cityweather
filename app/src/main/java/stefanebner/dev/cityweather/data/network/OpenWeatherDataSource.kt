@@ -3,12 +3,11 @@ package stefanebner.dev.cityweather.data.network
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
-import org.jetbrains.anko.doAsync
+import io.reactivex.schedulers.Schedulers
+import stefanebner.dev.cityweather.BuildConfig
 import stefanebner.dev.cityweather.data.database.CityDao
 import stefanebner.dev.cityweather.data.database.CityDatabase
 import stefanebner.dev.cityweather.model.City
-import stefanebner.dev.cityweather.model.WeatherEntry
-import stefanebner.dev.cityweather.utils.JsonParser
 
 class OpenWeatherDataSource(
         val context: Context,
@@ -17,15 +16,27 @@ class OpenWeatherDataSource(
 
     private val dao: CityDao = database.cityDatabase.cityDao()
     private val cities: MutableLiveData<List<City>> = MutableLiveData()
+    private val asCelsius: String = "metric"
+    private val restApi = RestApi()
 
     fun getAllCities(): LiveData<List<City>> = cities
 
-    fun requestData(url: String) {
-        doAsync {
-            val json = NetworkUtils().getJsonResponse(url)
-            val entry: WeatherEntry? = json?.let { JsonParser().parseWeatherFromJson(it) }
-            entry?.run { dao.insertCity(City(entry)) }
-        }
+    fun updateCityData(url: String) {
+        restApi.getWeatherForCity(url, BuildConfig.OpenWeatherApiKey, asCelsius)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe { weatherEntry ->
+                    dao.insertCity(City(weatherEntry))
+                }
+    }
+
+    fun updateCityData(id: Int) {
+        restApi.getWeatherForCity(id, BuildConfig.OpenWeatherApiKey, asCelsius)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe { weatherEntry ->
+                    dao.insertCity(City(weatherEntry))
+                }
     }
 
     fun syncWeatherEntries() {

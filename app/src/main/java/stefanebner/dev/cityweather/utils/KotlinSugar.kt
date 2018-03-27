@@ -20,6 +20,8 @@ fun Double.roundToTwoDecimals(): Double {
 }
 
 fun RecyclerView.showView(visible: Boolean) {
-    if (visible) visibility = View.VISIBLE
-    else visibility = View.INVISIBLE
+    visibility = when (visible) {
+        true -> View.VISIBLE
+        false -> View.INVISIBLE
+    }
 }
